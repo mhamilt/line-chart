@@ -26,7 +26,8 @@
       {
         x: time,
         y: wave,
-        type: 'lines'
+        type: 'lines',
+        hoverinfo: 'none'
       }];
       var layout = {
         title: 'Sine Wave',
@@ -43,7 +44,10 @@
         }
       };
 
-      Plotly.newPlot('graph', data, layout);
+      Plotly.newPlot('graph', data, layout,
+      {
+        staticPlot: true
+      });
 
       function animate()
       {
