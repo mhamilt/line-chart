@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Line Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style>
+      canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="width:75%;">
+      <canvas id="canvas"></canvas>
+    </div>
+    <br>
+    <br>
+
+    <script>
+      window.chartColors = {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(201, 203, 207)'
+      };
+      wave = new Array(100);
+      let radpersec = 2 * Math.PI * 400 / 8000;
+      var rad = 0;
+      for (var i = 0; i < wave.length; i++)
+      {
+        wave[i] = Math.sin(rad);
+        rad += radpersec;
+      }
+
+      yaxis = new Array(wave.length);
+      var config = {
+        type: 'line',
+        data:
+        {
+          labels: yaxis,
+          datasets: [
+          {
+            label: 'Amplitude',
+            backgroundColor: window.chartColors.blue,
+            borderColor: window.chartColors.blue,
+            data: wave,
+            fill: false,
+          }]
+        },
+        options:
+        {
+          elements:
+          {
+            line:
+            {
+              tension: 0 // disables bezier curves
+            }
+          },
+          responsive: true,
+          title:
+          {
+            display: true,
+            text: 'Chart.js Line Chart'
+          },
+          events: ['click'],
+          scales:
+          {
+            xAxes: [
+            {
+              display: true,
+              scaleLabel:
+              {
+                display: false,
+                labelString: 'Month'
+              }
+            }],
+            yAxes: [
+            {
+              display: true,
+              scaleLabel:
+              {
+                display: true,
+                labelString: 'Amplitude'
+              }
+            }]
+          }
+        }
+      };
+
+      function animatePlot()
+      {
+        wave.shift();
+        wave.push(Math.sin(rad))
+        rad += radpersec;
+
+        config.data.datasets.forEach(function(dataset)
+        {
+          dataset.data.forEach(function(datapoint, i)
+          {
+            datapoint = wave[i];
+          });
+        });
+        window.myLine.update();
+      }
+
+      function addDataPoint()
+      {
+        // var month = Months[config.data.labels.length % Months.length];
+        config.data.labels.push('');
+
+        config.data.datasets.forEach(function(dataset)
+        {
+          dataset.data.push(Math.random());
+        });
+
+        window.myLine.update();
+      }
+
+      window.onload = function()
+      {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myLine = new Chart(ctx, config);
+        setInterval(animatePlot, 100)
+      };
+    </script>
+  </body>
+
+</html>

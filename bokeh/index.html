@@ -23,7 +23,7 @@
       // create some data and a ColumnDataSource
       let radpersec = 2 * Math.PI * 400 / 8000;
       let rad = 0;
-      var x = Bokeh.LinAlg.linspace(0, 100, 100);
+      var x = Bokeh.LinAlg.linspace(0, 100, 200);
 
       var y = x.map(function(v)
       {
@@ -59,8 +59,8 @@
         title: "BokehJS Plot",
         x_range: xdr,
         y_range: ydr,
-        plot_width: 400,
-        plot_height: 400,
+        plot_width: 800,
+        plot_height: 600,
         background_fill_color: "#F2F2F7"
       });
 
