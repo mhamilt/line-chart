@@ -2,11 +2,17 @@
 <html>
 
   <head>
-    <title>Graph 3D demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>visjs 3D</title>
     <script type="text/javascript" src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"></script>
     <script type="text/javascript">
       var data = null;
       var graph = null;
+      let rad = 0;
+      var axisMax = 314;
+      var steps = 10; // number of datapoints will be steps*steps
+      var axisStep = axisMax / steps;
 
       function custom(x, y)
       {
@@ -20,18 +26,15 @@
         data = new vis.DataSet();
         // create some nice looking data with sin/cos
         var counter = 0;
-        var steps = 50; // number of datapoints will be steps*steps
-        var axisMax = 314;
-        var axisStep = axisMax / steps;
-        for (var x = 0; x < axisMax; x += axisStep)
+        for (var x = 0; x < steps; x++)
         {
-          for (var y = 0; y < axisMax; y += axisStep)
+          for (var y = 0; y < steps; y++)
           {
-            var value = custom(x, y);
+            var value = custom(x * axisStep, y * axisStep);
             data.add(
             {
               id: counter++,
-              x: x,
+              x: x + rad,
               y: y,
               z: value,
               style: value
@@ -54,12 +57,37 @@
         // Instantiate our graph object.
         var container = document.getElementById('mygraph');
         graph = new vis.Graph3d(container, data, options);
+        console.log(data);
+
+      }
+
+      function animate()
+      {
+        var counter = 0;
+        rad += 0.3;
+        for (var x = 0; x < steps; x++)
+        {
+          for (var y = 0; y < steps; y++)
+          {
+            var value = custom((x + rad) * axisStep, (y + rad) * axisStep);
+            data.update(
+            {
+              id: counter++,
+              z: value
+            })
+          }
+        }
+
+        // console.log('Done');
       }
     </script>
   </head>
 
   <body onload="drawVisualization();">
     <div id="mygraph"></div>
+    <script>
+      setInterval(animate, 33);
+    </script>
   </body>
 
 </html>
