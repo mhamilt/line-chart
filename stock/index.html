@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes, user-scalable = no">
+    <meta name='mobile-web-app-capable' content='yes' />
+    <meta name="apple-mobile-web-app-capable" content="yes" /> 
+
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+    crossorigin="anonymous"></script>
+    
+    <title>Stock API Test</title>
+</head>
+<body class="text-light bg-dark">
+    
+    <div class="container-fluid">        
+        <main class="bd-content mt-5">
+            <div class="container">
+                <h1>Stock API Test</h1>
+            </div>
+            <div class="container">
+                <input class="form-control mr-sm-2" type="search" placeholder="Type Ticker Symbol" aria-label="Type Ticker Symbol" id="searchbar" enabled>
+                <!-- <input id="searchbar" type="search" disabled> -->
+            </div>
+            <div class="container mt-4" id="results">
+                <p><b>Name:</b>             <i id="company-name"></i></p>
+                <p><b>Description:</b>      <i id="company-description"></i></p>
+                <p><b>Exchange:</b>         <i id="exchange"></i></p>
+                <p><b>Sector:</b>           <i id="sector"></i></p>
+            </div>
+            <div class="container table-responsive mt-4">
+                <table class="table table-bordered table-sm ">                    
+                    <thead class="font-weight-bold">
+                        <th>-5</th>
+                        <th>-4</th>
+                        <th>-3</th>
+                        <th>-2</th>
+                        <th>-1</th>
+                        <th>TTM</th>                        
+                    </thead>
+                    <tbody>
+                        <tr id="1SG">
+                            <td id="m5"></td>
+                            <td id="m4"></td>
+                            <td id="m3"></td>
+                            <td id="m2"></td>
+                            <td id="m1"></td>
+                            <td id="ttm"></td>                            
+                        </tr>                    
+                    </tbody>
+                </table>
+                <iframe src="./chartjs/?0&0&0&0&0&0" width="100%" height="470px" id="revenue-chart"></iframe>
+            </div>
+        </main>        
+    </div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js" integrity="sha512-qtX0GLM3qX8rxJN1gyDfcnMFFrKvixfoEOwbBib9VafR5vbChV5LeE5wSI/x+IlCkTY5ZFddFDCCfaVJJNnuKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./alpha_vantage_search.js" defer></script>
+</body>
+</html>
