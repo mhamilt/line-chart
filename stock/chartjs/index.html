@@ -33,19 +33,17 @@
             purple: 'rgb(153, 102, 255)',
             grey: 'rgb(201, 203, 207)'
         };
-        revenue = new Array(6);
         
         let params = location.href.split('?')[1].split('&');
-        console.log(params)
-        revenue = Array.from(params, (x) => parseInt(x));
-                 
         
-        yaxis = new Array(revenue.length);
+        let revenue = Array.from(params, (x) => parseFloat(x))
+        
+        xaxis = ["-5", "-4", "-3", "-2", "-1", "TTM"]
         var config = {
             type: 'line',
             data:
             {
-                labels: yaxis,
+                labels: xaxis,
                 datasets: [
                 {
                     label: 'Revenue',
@@ -56,7 +54,30 @@
                 }]
             },
             options:
-            {
+            { 
+                scales: {
+                    xAxes: [
+                    {
+                        display: true,
+                        scaleLabel:
+                        {
+                            display: false,
+                            labelString: 'Year'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel:
+                        {
+                            display: true,
+                            labelString: 'Revenue'
+                        },
+                        ticks: {
+                            suggestedMin: 50,
+                            suggestedMax: 100
+                        }
+                    }]
+                },
                 elements:
                 {
                     line:
@@ -71,58 +92,8 @@
                     text: 'Chart.js Line Chart'
                 },
                 events: ['click'],
-                scales:
-                {
-                    xAxes: [
-                    {
-                        display: true,
-                        scaleLabel:
-                        {
-                            display: false,
-                            labelString: 'Year'
-                        }
-                    }],
-                    yAxes: [
-                    {
-                        display: true,
-                        scaleLabel:
-                        {
-                            display: true,
-                            labelString: 'Revenue'
-                        }
-                    }]
-                }
             }
         };
-        
-        // function animatePlot()
-        // {
-        //     wave.shift();
-        //     wave.push(Math.sin(rad))
-        //     rad += radpersec;
-            
-        //     config.data.datasets.forEach(function(dataset)
-        //     {
-        //         dataset.data.forEach(function(datapoint, i)
-        //         {
-        //             datapoint = wave[i];
-        //         });
-        //     });
-        //     window.myLine.update();
-        // }
-        
-        // function addDataPoint()
-        // {
-        //     // var month = Months[config.data.labels.length % Months.length];
-        //     config.data.labels.push('');
-            
-        //     config.data.datasets.forEach(function(dataset)
-        //     {
-        //         dataset.data.push(Math.random());
-        //     });
-            
-        //     window.myLine.update();
-        // }
         
         window.onload = function()
         {
